@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MENU_practice</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    a {
+      color: black;
+      text-decoration: none;
+    }
+
+    /* -------- popup --------- */
+
+    #popup_chk {
+      display: none;
+    }
+
+    #popup_chk:checked~.popup {
+      display: block;
+    }
+
+    #popup_chk~.popup {
+      display: none;
+    }
+
+    /* ~ : 아이디에 해당하는 태그의 형제(같은 레벨)들 중에 아래에 있는(동생) 태그*/
+
+    .popup {
+      width: 300px;
+      height: 300px;
+      background-color: yellow;
+      padding: 10px;
+      position: absolute;
+      top: 100px;
+      left: 100px;
+    }
+
+    .popup p {
+      width: 300px;
+      height: 250px;
+      border: 1px solid black;
+    }
+
+    .popup .popup_close {
+      margin-left: 280px;
+      /* 인라인태그이므로 속성을 변경 */
+      margin-top: 20px;
+    }
+
+
+    /* -------- lnb_01 -------- */
+    .lnb_01,
+    .lnb_02,
+    .lnb_03,
+    .lnb_04,
+    .lnb_05 {
+      width: 1000px;
+      height: 50px;
+      margin: 0 auto;
+    }
+
+    .lnb_01 li {
+      width: 200px;
+      height: 50px;
+      background-color: black;
+      color: white;
+      float: left;
+      text-align: center;
+      line-height: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .lnb_01 li:hover {
+      background-color: #E96479;
+      color: black;
+    }
+
+
+    /* -------- lnb_02 -------- */
+    .lnb_02 li {
+      width: 200px;
+      height: 50px;
+      float: left;
+    }
+
+    .lnb_02 li a {
+      display: block;
+      /* a 전체를 감쌀 수 있게 태그 속성 변경 */
+      text-align: center;
+      line-height: 50px;
+      background-color: black;
+      color: #fff;
+    }
+
+    .lnb_02 li a:hover {
+      color: #222;
+      background-color: #ccc;
+    }
+
+
+    /* -------- lnb_03 full down -------- */
+    .lnb_03 {
+      margin-bottom: 200px;
+    }
+
+    .lnb_03 ul {
+      height: 0px;
+      overflow: hidden;
+      /* 핵심 */
+      transition: height 0.2s;
+    }
+
+    .lnb_03:hover ul {
+      height: 200px;
+    }
+
+    .lnb_03 li {
+      width: 200px;
+      height: 50px;
+      float: left;
+    }
+
+    .lnb_03 li a {
+      display: block;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      line-height: 50px;
+      transition: all 0.5s;
+    }
+
+    .lnb_03>li>a:hover {
+      background-color: #ccc;
+      color: black;
+    }
+
+    .lnb_03 li li>a:hover {
+      background-color: #E96479;
+      color: #fff;
+    }
+
+    /* li-li의 자식요소에 hover하면 색 변경 */
+
+    /* .lnb_03 li li {display: none;} */
+
+    /* .lnb_03 li:hover li {display: block;} /* li의 자식 요소에 hover를 걸어 서브 메뉴가 나오게 만들기*/
+
+    /* .lnb_03:hover li {display: block;} /* 풀다운 메뉴 */
+
+
+    /* -------- lnb_04 -------- */
+    .lnb_04 {
+      margin-bottom: 200px;
+    }
+
+    .lnb_04 ul {
+      height: 0px;
+      overflow: hidden;
+      /* 핵심 */
+      opacity: 0;
+      transition: height 0.2s;
+    }
+
+    .lnb_04 li:hover ul {
+      height: 200px;
+      opacity: 1;
+    }
+
+    .lnb_04 li {
+      width: 200px;
+      height: 50px;
+      float: left;
+    }
+
+    .lnb_04 li a {
+      display: block;
+      background-color: black;
+      color: #fff;
+      line-height: 50px;
+      text-align: center;
+      transition: all 0.5s;
+    }
+
+    .lnb_04>li>a:hover {
+      background-color: #ccc;
+      color: black;
+    }
+
+    .lnb_04 li li>a:hover {
+      background-color: #E96479;
+      color: #fff;
+    }
+
+
+
+
+
+    /* -------- lnb_05 -------- */
+    .lnb_05 li {
+      width: 200px;
+      height: 50px;
+      float: left;
+      /* display: none; */
+      position: relative;
+    }
+
+    .lnb_05 li li {
+      display: none;
+    }
+
+    .lnb_05 li a {
+      display: block;
+      overflow: hidden;
+      background-color: black;
+      color: white;
+      line-height: 50px;
+      text-align: center;
+    }
+
+    .lnb_05 li a:hover {
+      background-color: #E96479;
+      color: black;
+    }
+
+
+    .lnb_05 ul {
+      width: 800px;
+      /* height: 0px; */
+      /* overflow: hidden; */
+      transition: height 0.3s;
+    }
+
+    .lnb_05 li:hover li {
+      display: block;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <div class="popup_box">
+    <input type="checkbox" id="popup_chk" checked> <!-- 처음부터 보이게 하려면 checked -->
+    <div class="popup">
+      <p>popup</p>
+      <label for="popup_chk" class="popup_close">X</label>
+      <!-- label for구문에서 기능은 id가 받고 디자인은 class로 설정 (*꼭 id여야 함. class 절대 no) -->
+    </div>
+  </div>
+
+
+  <ul class="lnb_01">
+    <li>menu01</li>
+    <li>menu02</li>
+    <li>menu03</li>
+    <li>menu04</li>
+    <li>menu05</li>
+  </ul>
+  <br />
+
+  <ul class="lnb_02">
+    <li><a href="#">menu01</a></li>
+    <li><a href="#">menu02</a></li>
+    <li><a href="#">menu03</a></li>
+    <li><a href="#">menu04</a></li>
+    <li><a href="#">menu05</a></li>
+  </ul>
+  <br />
+
+  <ul class="lnb_03">
+    <!-- 구조 파악 잘하기 -->
+    <li><a href="#">menu01</a>
+      <ul>
+        <li><a href="#">menu01-1</a></li>
+        <li><a href="#">menu01-2</a></li>
+        <li><a href="#">menu01-3</a></li>
+        <li><a href="#">menu01-4</a></li>
+      </ul>
+    </li><!-- menu01 -->
+    <li><a href="#">menu02</a>
+      <ul>
+        <li><a href="#">menu02-1</a></li>
+        <li><a href="#">menu02-2</a></li>
+        <li><a href="#">menu02-3</a></li>
+        <li><a href="#">menu02-4</a></li>
+      </ul>
+    </li><!-- menu02 -->
+    <li><a href="#">menu03</a>
+      <ul>
+        <li><a href="#">menu03-1</a></li>
+        <li><a href="#">menu03-2</a></li>
+        <li><a href="#">menu03-3</a></li>
+        <li><a href="#">menu03-4</a></li>
+      </ul>
+    </li><!-- menu03 -->
+    <li><a href="#">menu04</a>
+      <ul>
+        <li><a href="#">menu04-1</a></li>
+        <li><a href="#">menu04-2</a></li>
+        <li><a href="#">menu04-3</a></li>
+        <li><a href="#">menu04-4</a></li>
+      </ul>
+    </li><!-- menu04 -->
+    <li><a href="#">menu05</a>
+      <ul>
+        <li><a href="#">menu05-1</a></li>
+        <li><a href="#">menu05-2</a></li>
+        <li><a href="#">menu05-3</a></li>
+        <li><a href="#">menu05-4</a></li>
+      </ul>
+    </li><!-- menu05 -->
+  </ul>
+  <br />
+
+  <ul class="lnb_04">
+    <li><a href="#">menu01</a>
+      <ul>
+        <li><a href="#">menu01-1</a></li>
+        <li><a href="#">menu01-2</a></li>
+        <li><a href="#">menu01-3</a></li>
+        <li><a href="#">menu01-4</a></li>
+      </ul>
+    </li><!-- menu01 -->
+    <li><a href="#">menu02</a>
+      <ul>
+        <li><a href="#">menu02-1</a></li>
+        <li><a href="#">menu02-2</a></li>
+        <li><a href="#">menu02-3</a></li>
+        <li><a href="#">menu02-4</a></li>
+      </ul>
+    </li><!-- menu02 -->
+    <li><a href="#">menu03</a>
+      <ul>
+        <li><a href="#">menu03-1</a></li>
+        <li><a href="#">menu03-2</a></li>
+        <li><a href="#">menu03-3</a></li>
+        <li><a href="#">menu03-4</a></li>
+      </ul>
+    </li><!-- menu03 -->
+    <li><a href="#">menu04</a>
+      <ul>
+        <li><a href="#">menu04-1</a></li>
+        <li><a href="#">menu04-2</a></li>
+        <li><a href="#">menu04-3</a></li>
+        <li><a href="#">menu04-4</a></li>
+      </ul>
+    </li><!-- menu04 -->
+    <li><a href="#">menu05</a>
+      <ul>
+        <li><a href="#">menu05-1</a></li>
+        <li><a href="#">menu05-2</a></li>
+        <li><a href="#">menu05-3</a></li>
+        <li><a href="#">menu05-4</a></li>
+      </ul>
+    </li><!-- menu05 -->
+  </ul>
+  <br />
+
+  <ul class="lnb_05">
+    <li><a href="#">menu01</a>
+      <ul>
+        <li><a href="#">menu01-1</a></li>
+        <li><a href="#">menu01-2</a></li>
+        <li><a href="#">menu01-3</a></li>
+        <li><a href="#">menu01-4</a></li>
+      </ul>
+    </li><!-- menu01 -->
+    <li><a href="#">menu02</a>
+      <ul>
+        <li><a href="#">menu02-1</a></li>
+        <li><a href="#">menu02-2</a></li>
+        <li><a href="#">menu02-3</a></li>
+        <li><a href="#">menu02-4</a></li>
+      </ul>
+    </li><!-- menu02 -->
+    <li><a href="#">menu03</a>
+      <ul>
+        <li><a href="#">menu03-1</a></li>
+        <li><a href="#">menu03-2</a></li>
+        <li><a href="#">menu03-3</a></li>
+        <li><a href="#">menu03-4</a></li>
+      </ul>
+    </li><!-- menu03 -->
+    <li><a href="#">menu04</a>
+      <ul>
+        <li><a href="#">menu04-1</a></li>
+        <li><a href="#">menu04-2</a></li>
+        <li><a href="#">menu04-3</a></li>
+        <li><a href="#">menu04-4</a></li>
+      </ul>
+    </li><!-- menu04 -->
+    <li><a href="#">menu05</a>
+      <ul>
+        <li><a href="#">menu05-1</a></li>
+        <li><a href="#">menu05-2</a></li>
+        <li><a href="#">menu05-3</a></li>
+        <li><a href="#">menu05-4</a></li>
+      </ul>
+    </li><!-- menu05 -->
+  </ul>
+  <br />
+
+</body>
+
+</html>

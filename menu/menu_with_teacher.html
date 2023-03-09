@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MENU</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    a {
+      color: black;
+      text-decoration: none;
+    }
+
+    body {
+      height: 3000px;
+    }
+
+    /* -------- popup --------- */
+
+    #popup_chk {
+      display: none;
+    }
+
+    #popup_chk:checked~.popup {
+      display: block;
+    }
+
+    #popup_chk~.popup {
+      display: none;
+    }
+
+    /* ~ : 아이디에 해당하는 태그의 형제(같은 레벨)들 중에 아래에 있는(동생) 태그*/
+
+    .popup {
+      /* position: relative; popup창의 경우 position이 absolute라는 속성을 가지고 있기 때문에 z-index가 적용이 된다. 만약, 다른 경우(ex.id/password popup...)에 position을 relative와 absolute를 둘 다 사용해야 할 경우에는 아무 의미 없는 박스를 하나 만들어서(겹박스) relative를 만들어 적용한다. */
+      z-index: 999;
+      /* 우선순위가 높다는 것을 알리기 위한 높은 숫자 */
+      width: 300px;
+      height: 300px;
+      background-color: #FCE22A;
+      padding: 10px;
+      position: absolute;
+      top: 100px;
+      left: 100px;
+    }
+
+    .popup p {
+      width: 300px;
+      height: 250px;
+      border: 1px solid black;
+    }
+
+    .popup .popup_close {
+      margin-left: 280px;
+      /* 인라인태그이므로 속성을 변경 */
+      margin-top: 20px;
+    }
+
+    /* -------- popup_icon -------- */
+    #icon_chk {
+      display: none;
+    }
+
+    #icon_chk:checked~.icon {
+      display: block;
+    }
+
+    #icon_chk~.icon {
+      display: none;
+    }
+
+    .icon {
+      position: absolute;
+      top: 500px;
+      left: 100px;
+      width: 200px;
+      height: 200px;
+      z-index: 2;
+      /* border: 1px solid black; */
+      animation-name: popup_icon;
+      animation-duration: 1s;
+      /* 애니메이션 속도 조절. 시간이 빠를 수록 빠른 효과 */
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes popup_icon {
+      0% {
+        top: 500px;
+      }
+
+      50% {
+        top: 450px;
+      }
+
+      100% {
+        top: 500px;
+      }
+    }
+
+    /* popup_icon을 둥둥 떠다니게 하는 애니메이션 효과. 스타일시트의 애니메이션은 멈추게 할 수가 없음(js에서 멈추는 기능을 만들어야 함) */
+
+
+    .icon_inner {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .icon .icon_inner div {
+      width: 200px;
+      height: 200px;
+      background-color: #F16767;
+      border-radius: 100px;
+      text-align: center;
+      line-height: 200px;
+    }
+
+    .icon label {
+      display: block;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+
+    /* -------- header -------- */
+    .header {
+      /* position: fixed;
+      top: 0; left: 0; */
+      width: 100%;
+      height: 200px;
+      background-color: #ccc;
+    }
+
+    .lnb {
+      position: sticky;
+      top: 0;
+      /* 좌표 설정 중요 */
+      width: 100%;
+      height: 50px;
+      background-color: #609966;
+    }
+
+
+
+
+
+    /* -------- lnb_01 -------- */
+    .lnb_01,
+    .lnb_02,
+    .lnb_03,
+    .lnb_04,
+    .lnb_05 {
+      width: 1000px;
+      height: 50px;
+      margin: 0 auto;
+    }
+
+    .lnb_01 li {
+      width: 200px;
+      height: 50px;
+      background-color: black;
+      color: white;
+      float: left;
+      text-align: center;
+      line-height: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .lnb_01 li:hover {
+      background-color: #E96479;
+      color: black;
+    }
+
+
+    /* -------- lnb_02 -------- */
+    .lnb_02 li {
+      width: 200px;
+      height: 50px;
+      float: left;
+    }
+
+    .lnb_02 li a {
+      display: block;
+      /* a 전체를 감쌀 수 있게 태그 속성 변경 */
+      text-align: center;
+      line-height: 50px;
+      background-color: black;
+      color: #fff;
+    }
+
+    .lnb_02 li a:hover {
+      color: #222;
+      background-color: #ccc;
+    }
+
+
+    /* -------- lnb_03 full down -------- */
+    .lnb_03 {
+      z-index: 3;
+      position: relative;
+
+    }
+
+    .lnb_03 ul {
+      height: 0px;
+      overflow: hidden;
+      /* 핵심 */
+      transition: height 0.2s;
+    }
+
+    .lnb_03:hover ul {
+      height: 200px;
+    }
+
+    .lnb_03 li {
+      width: 200px;
+      height: 50px;
+      float: left;
+    }
+
+    .lnb_03 li a {
+      display: block;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      line-height: 50px;
+      transition: all 0.5s;
+    }
+
+    .lnb_03>li>a:hover {
+      background-color: #ccc;
+      color: black;
+    }
+
+    .lnb_03 li li>a:hover {
+      background-color: #E96479;
+      color: #fff;
+    }
+
+    /* li-li의 자식요소에 hover하면 색 변경 */
+
+    /* .lnb_03 li li {display: none;} */
+
+    /* .lnb_03 li:hover li {display: block;} /* li의 자식 요소에 hover를 걸어 서브 메뉴가 나오게 만들기*/
+
+    /* .lnb_03:hover li {display: block;} /* 풀다운 메뉴 */
+
+
+    /* -------- lnb_04 -------- */
+    .lnb_04 {
+      z-index: 1;
+      position: relative;
+    }
+
+    .lnb_04 ul {
+      height: 0px;
+      overflow: hidden;
+      /* 핵심 */
+      opacity: 0;
+      transition: height 0.2s;
+    }
+
+    .lnb_04 li:hover ul {
+      height: 200px;
+      opacity: 1;
+    }
+
+    .lnb_04 li {
+      width: 200px;
+      height: 50px;
+      float: left;
+    }
+
+    .lnb_04 li a {
+      display: block;
+      background-color: black;
+      color: #fff;
+      line-height: 50px;
+      text-align: center;
+      transition: all 0.5s;
+    }
+
+    .lnb_04>li>a:hover {
+      background-color: #ccc;
+      color: black;
+    }
+
+    .lnb_04 li li>a:hover {
+      background-color: #E96479;
+      color: #fff;
+    }
+
+
+    /* -------- lnb_05 -------- */
+    .lnb_05 li {
+      width: 200px;
+      height: 50px;
+      float: left;
+      /* display: none; */
+      position: relative;
+    }
+
+    .lnb_05 li li {
+      display: none;
+    }
+
+    .lnb_05 li a {
+      display: block;
+      overflow: hidden;
+      background-color: black;
+      color: white;
+      line-height: 50px;
+      text-align: center;
+    }
+
+    .lnb_05 li a:hover {
+      background-color: #E96479;
+      color: black;
+    }
+
+    .lnb_05 ul {
+      width: 800px;
+      /* height: 0px; */
+      /* overflow: hidden; */
+      transition: height 0.3s;
+      overflow: hidden;
+    }
+
+    .lnb_05 li:hover li {
+      display: block;
+    }
+
+    .lnb_05 li ul {
+      position: absolute;
+    }
+
+    .lnb_05 li li:last-child {
+      right: 0;
+    }
+
+
+    /* -------- lnb_06 hamburger button -------- */
+    #ham_chk {
+      display: none;
+    }
+
+    /* #ham_chk:checked~.menu_box .menu_list {
+      display: block;
+    }
+    #ham_chk~.menu_box .menu_list {
+      display: none;
+    } */
+
+    #ham_chk:checked~.menu_box .menu_list {
+      height: 300px;
+    }
+
+
+    #ham_chk:checked~.menu_box .lnb_06 .menu_close {
+      display: block;
+    }
+
+    #ham_chk:checked~.menu_box .lnb_06 .menu_open {
+      display: none;
+    }
+
+    #ham_chk~.menu_box .lnb_06 .menu_close {
+      display: none;
+    }
+
+    #ham_chk~.menu_box .lnb_06 .menu_open {
+      display: block;
+    }
+
+    .menu_box {
+      width: 1050px;
+      margin: 0 auto;
+    }
+
+    .menu_box .lnb_06 {
+      width: 1050px;
+      height: 50px;
+    }
+
+    .menu_box .lnb_06 label {
+      display: block;
+      width: 50px;
+      height: 50px;
+      border: 1px solid black;
+      box-sizing: border-box;
+      font-size: 40px;
+      line-height: 50px;
+      text-align: center;
+      cursor: pointer;
+      float: left;
+    }
+
+    .menu_box .lnb_06 ul {
+      width: 1000px;
+      float: left;
+    }
+
+    .menu_box .lnb_06 ul li {
+      width: 200px;
+      height: 50px;
+      background-color: black;
+      color: white;
+      text-align: center;
+      line-height: 50px;
+      float: left;
+    }
+
+    .menu_box .menu_list {
+      /* width: 1050px; height: 200px; */
+      /* display: none; */
+      width: 1050px;
+      height: 0;
+      /* 높이를 조절하는 방법 */
+      overflow: hidden;
+      /* 잊지말고 작성해야 함 */
+      background-color: #ccc;
+      transition: all 0.2s;
+    }
+
+
+    /* -------- tab_menu -------- */
+    #tab01,
+    #tab02,
+    #tab03 {
+      display: none;
+    }
+
+    #tab01:checked~.sheet .sheet_01 {
+      display: block;
+    }
+
+    /* #tab01:checked ~ .sheet .sheet_02 {display: none;}
+    #tab01:checked ~ .sheet .sheet_03 {display: none;} */
+
+    /* #tab02:checked ~ .sheet .sheet_01 {display: none;} */
+    #tab02:checked~.sheet .sheet_02 {
+      display: block;
+    }
+
+    /* #tab02:checked ~ .sheet .sheet_03 {display: none;} */
+
+    /* #tab03:checked ~ .sheet .sheet_01 {display: none;}
+    #tab03:checked ~ .sheet .sheet_02 {display: none;} */
+    #tab03:checked~.sheet .sheet_03 {
+      display: block;
+    }
+
+    #tab01:checked~.label .label_01 {
+      background-color: #FFE7CC;
+    }
+
+    #tab02:checked~.label .label_02 {
+      background-color: #FFE7CC;
+    }
+
+    #tab03:checked~.label .label_03 {
+      background-color: #FFE7CC;
+    }
+
+
+    .tab_menu {
+      width: 1000px;
+      height: 450px;
+      margin: 0 auto;
+    }
+
+
+    .tab_menu .label {
+      overflow: hidden;
+    }
+
+    .tab_menu .label label {
+      display: block;
+      width: 150px;
+      height: 50px;
+      background-color: #ccc;
+      text-align: center;
+      line-height: 50px;
+      float: left;
+      border-radius: 15px 15px 0 0;
+      cursor: pointer;
+    }
+
+    .tab_menu .sheet div {
+      display: none;
+      width: 1000px;
+      height: 400px;
+      background-color: #F8CBA6;
+    }
+
+    /* sheet가 아니라 sheet 하위 div에 display: none을 걸어야 하며, 이렇게 초기값을 지정하여 명령문을 작성할 경우에는 풀어서 작성하지 않아도 됨 */
+
+
+
+
+
+
+
+
+
+
+
+    /* -------- wing_banner -------- */
+    #wing_chk {
+      display: none;
+    }
+
+    #wing_chk:checked~.wing_banner {
+      right: 0;
+    }
+
+    #wing_chk~.wing_banner {
+      right: -300px;
+    }
+
+    #wing_chk:checked~.wing_banner .wing_close {
+      display: block;
+    }
+
+    #wing_chk:checked~.wing_banner .wing_open {
+      display: none;
+    }
+
+    #wing_chk~.wing_banner .wing_close {
+      display: none;
+    }
+
+    #wing_chk~.wing_banner .wing_open {
+      display: block;
+    }
+
+    .wing_banner {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 330px;
+      height: 100vh;
+      /* border: 1px solid black; */
+      transition: all 0.3s;
+      z-index: 10;
+    }
+
+    .wing_banner label {
+      display: block;
+      width: 30px;
+      height: 30px;
+      background-color: yellow;
+      float: left;
+      margin-top: 200px;
+    }
+
+    .wing_banner .wing {
+      width: 300px;
+      height: 100%;
+      background-color: #E3DFFD;
+      float: left;
+      
+    }
+
+    /* -------- top_btn -------- */
+    .top_btn {
+      position: fixed;
+      bottom: 100px;
+      right: 100px;
+      display: block;
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      line-height: 50px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="popup_box">
+    <input type="checkbox" id="popup_chk" checked> <!-- 처음부터 보이게 하려면 checked -->
+    <div class="popup">
+      <p>popup</p>
+      <label for="popup_chk" class="popup_close">X</label>
+      <!-- label for구문에서 기능은 id가 받고 디자인은 class로 설정 (*꼭 id여야 함. class 절대 no) -->
+    </div>
+  </div>
+
+  <div class="popup_icon_box">
+    <input type="checkbox" id="icon_chk" checked>
+    <div class="icon">
+      <div class="icon_inner">
+        <div>popup_icon</div>
+        <label for="icon_chk" class="icon_close">X</label>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">logo / gnb</header>
+  <nav class="lnb"> lnb </nav>
+  <br />
+
+
+  <ul class="lnb_01" id="header">
+    <li>menu01</li>
+    <li>menu02</li>
+    <li>menu03</li>
+    <li>menu04</li>
+    <li>menu05</li>
+  </ul>
+  <br />
+
+  <ul class="lnb_02">
+    <li><a href="#">menu01</a></li>
+    <li><a href="#">menu02</a></li>
+    <li><a href="#">menu03</a></li>
+    <li><a href="#">menu04</a></li>
+    <li><a href="#">menu05</a></li>
+  </ul>
+  <br />
+
+  <ul class="lnb_03">
+    <!-- 구조 파악 잘하기 -->
+    <li><a href="#">menu01</a>
+      <ul>
+        <li><a href="#">menu01-1</a></li>
+        <li><a href="#">menu01-2</a></li>
+        <li><a href="#">menu01-3</a></li>
+        <li><a href="#">menu01-4</a></li>
+      </ul>
+    </li><!-- menu01 -->
+    <li><a href="#">menu02</a>
+      <ul>
+        <li><a href="#">menu02-1</a></li>
+        <li><a href="#">menu02-2</a></li>
+        <li><a href="#">menu02-3</a></li>
+        <li><a href="#">menu02-4</a></li>
+      </ul>
+    </li><!-- menu02 -->
+    <li><a href="#">menu03</a>
+      <ul>
+        <li><a href="#">menu03-1</a></li>
+        <li><a href="#">menu03-2</a></li>
+        <li><a href="#">menu03-3</a></li>
+        <li><a href="#">menu03-4</a></li>
+      </ul>
+    </li><!-- menu03 -->
+    <li><a href="#">menu04</a>
+      <ul>
+        <li><a href="#">menu04-1</a></li>
+        <li><a href="#">menu04-2</a></li>
+        <li><a href="#">menu04-3</a></li>
+        <li><a href="#">menu04-4</a></li>
+      </ul>
+    </li><!-- menu04 -->
+    <li><a href="#">menu05</a>
+      <ul>
+        <li><a href="#">menu05-1</a></li>
+        <li><a href="#">menu05-2</a></li>
+        <li><a href="#">menu05-3</a></li>
+        <li><a href="#">menu05-4</a></li>
+      </ul>
+    </li><!-- menu05 -->
+  </ul>
+  <br />
+
+  <ul class="lnb_04">
+    <li><a href="#">menu01</a>
+      <ul>
+        <li><a href="#">menu01-1</a></li>
+        <li><a href="#">menu01-2</a></li>
+        <li><a href="#">menu01-3</a></li>
+        <li><a href="#">menu01-4</a></li>
+      </ul>
+    </li><!-- menu01 -->
+    <li><a href="#">menu02</a>
+      <ul>
+        <li><a href="#">menu02-1</a></li>
+        <li><a href="#">menu02-2</a></li>
+        <li><a href="#">menu02-3</a></li>
+        <li><a href="#">menu02-4</a></li>
+      </ul>
+    </li><!-- menu02 -->
+    <li><a href="#">menu03</a>
+      <ul>
+        <li><a href="#">menu03-1</a></li>
+        <li><a href="#">menu03-2</a></li>
+        <li><a href="#">menu03-3</a></li>
+        <li><a href="#">menu03-4</a></li>
+      </ul>
+    </li><!-- menu03 -->
+    <li><a href="#">menu04</a>
+      <ul>
+        <li><a href="#">menu04-1</a></li>
+        <li><a href="#">menu04-2</a></li>
+        <li><a href="#">menu04-3</a></li>
+        <li><a href="#">menu04-4</a></li>
+      </ul>
+    </li><!-- menu04 -->
+    <li><a href="#">menu05</a>
+      <ul>
+        <li><a href="#">menu05-1</a></li>
+        <li><a href="#">menu05-2</a></li>
+        <li><a href="#">menu05-3</a></li>
+        <li><a href="#">menu05-4</a></li>
+      </ul>
+    </li><!-- menu05 -->
+  </ul>
+  <br />
+
+  <ul class="lnb_05">
+    <li><a href="#">menu01</a>
+      <ul>
+        <li><a href="#">menu01-1</a></li>
+        <li><a href="#">menu01-2</a></li>
+        <li><a href="#">menu01-3</a></li>
+        <li><a href="#">menu01-4</a></li>
+      </ul>
+    </li><!-- menu01 -->
+    <li><a href="#">menu02</a>
+      <ul>
+        <li><a href="#">menu02-1</a></li>
+        <li><a href="#">menu02-2</a></li>
+        <li><a href="#">menu02-3</a></li>
+        <li><a href="#">menu02-4</a></li>
+      </ul>
+    </li><!-- menu02 -->
+    <li><a href="#">menu03</a>
+      <ul>
+        <li><a href="#">menu03-1</a></li>
+        <li><a href="#">menu03-2</a></li>
+        <li><a href="#">menu03-3</a></li>
+        <li><a href="#">menu03-4</a></li>
+      </ul>
+    </li><!-- menu03 -->
+    <li><a href="#">menu04</a>
+      <ul>
+        <li><a href="#">menu04-1</a></li>
+        <li><a href="#">menu04-2</a></li>
+        <li><a href="#">menu04-3</a></li>
+        <li><a href="#">menu04-4</a></li>
+      </ul>
+    </li><!-- menu04 -->
+    <li><a href="#">menu05</a>
+      <ul>
+        <li><a href="#">menu05-1</a></li>
+        <li><a href="#">menu05-2</a></li>
+        <li><a href="#">menu05-3</a></li>
+        <li><a href="#">menu05-4</a></li>
+      </ul>
+    </li><!-- menu05 -->
+  </ul>
+  <br />
+
+  <input type="checkbox" id="ham_chk">
+  <div class="menu_box">
+    <nav class="lnb_06">
+      <label for="ham_chk" class="menu_open">+</label>
+      <label for="ham_chk" class="menu_close">-</label>
+      <ul>
+        <li>menu01</li>
+        <li>menu02</li>
+        <li>menu03</li>
+        <li>menu04</li>
+        <li>menu05</li>
+      </ul>
+    </nav>
+    <div class="menu_list">
+      <h1>menu_list</h1>
+    </div>
+  </div>
+  <br />
+
+
+  <section class="tab_menu">
+    <input type="radio" name="tab" id="tab01" checked>
+    <input type="radio" name="tab" id="tab02">
+    <input type="radio" name="tab" id="tab03">
+    <!-- <div class="input"> -->
+    <!-- 그룹을 묶어버리면 부모가 달라지기 때문에 형제들을 소환하는 ~ 구문을 사용할 수 없음! 주의! -->
+    <!-- </div> -->
+
+
+    <div class="label">
+      <label for="tab01" class="label_01">공지사항</label>
+      <label for="tab01" class="label_02">Q&A</label>
+      <label for="tab01" class="label_03">오시는 길</label>
+      <!-- 구분하기 위해서 label이라는 class명으로 작성했으나, 원래 공지사항이면 notice, Q&A면 Q&A, 약도면 map 등으로 클래스명을 지정해야 함 -->
+    </div>
+
+    <div class="sheet">
+      <div class="sheet_01">sheet_01</div>
+      <div class="sheet_02">sheet_02</div>
+      <div class="sheet_03">sheet_03</div>
+    </div>
+  </section> <!-- //tab_menu -->
+
+
+
+
+  <aside class="wing_box">
+    <input type="checkbox" id="wing_chk">
+    <div class="wing_banner">
+      <label for="wing_chk" class="wing_open">
+        <</label> <label for="wing_chk" class="wing_close">X
+      </label>
+      <div class="wing">
+        wing_banner
+      </div> <!-- 실제적으로 움직이는 부분 -->
+    </div>
+  </aside>
+
+  <a href="#header" class="top_btn">TOP</a>
+
+
+</body>
+
+</html>

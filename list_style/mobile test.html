@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+  <title>IOS list-style</title>
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    img {
+      display: block;
+    }
+
+    .status_bar {
+      position: relative;
+      width: 100%;
+      height: 16px;
+      background-color: #81B214;
+      color: #fff;
+    }
+
+    .status_bar .bar {
+      position: absolute;
+      overflow: hidden;
+    }
+
+    .status_bar .bar_left {
+      top: 0px;
+      left: 0px;
+    }
+
+    .status_bar .bar_right {
+      top: 0px;
+      right: 0px;
+    }
+
+    .status_bar ul li {
+      font-size: 12px;
+      line-height: 16px;
+      margin: 0px 3px;
+      float: left;
+    }
+
+    .status_bar ul li i {
+      font-size: 10px;
+      line-height: 16px;
+    }
+
+    .status_bar .time {
+      font-size: 12px;
+      text-align: center;
+      line-height: 16px;
+      color: #fff;
+    }
+
+
+    .header {
+      position: relative;
+      height: 60px;
+      color: #fff;
+      background-color: #81B214;
+      overflow: hidden;
+    }
+
+    .header div:first-child {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 70px;
+      padding-left: 10px;
+      box-sizing: border-box;
+    }
+
+    .header div:last-child {
+      width: 100%;
+      text-align: center;
+    }
+
+    .header div h3 {
+      margin-top: 25px;
+    }
+
+    /* -------- search -------- */
+    .search {
+      width: 100%;
+      height: 55px;
+      background-color: #ccc;
+      /* overflow: hidden; */
+
+    }
+
+    .search .search_bar {
+      display: inline-block;
+      width: 95%;
+      height: 35px;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%);
+      position: relative;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 5px;
+      box-sizing: border-box;
+      float: left;
+    }
+
+    .search .search_bar .fa-search {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #888;
+    }
+
+    .search .search_bar p {
+      position: absolute;
+      top: 7px;
+      left: 35px;
+      color: #888;
+    }
+
+    .search .search_bar .mic {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #888;
+    }
+
+
+    /* chat_list */
+    .list {
+      width: 100%;
+      height: 70px;
+      background-color: #fff;
+      border-bottom: 1px solid #888;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .list .list_img {
+      width: 50px;
+      height: 50px;
+      float: left;
+      margin: 2%;
+    }
+
+    .list .list_img img {
+      width: 100%;
+    }
+
+    .list .list_txt {
+      display: inline-block;
+      width: calc(100% - 106px - 6%);
+      height: 70px;
+      padding: 10px;
+      box-sizing: border-box;
+      vertical-align: middle;
+    }
+
+    .list .list_txt p {
+      color: #888;
+    }
+
+    .list .list_time {
+      width: 56px;
+      height: 70px;
+      text-align: right;
+      color: #999;
+      padding: 10px 10px 0 0;
+      box-sizing: border-box;
+      float: right;
+      margin-left: 2%;
+    }
+
+    .list .list_time p {
+      font-size: 11px;
+    }
+
+    .list .list_time span {
+      display: inline-block;
+      font-size: 11px;
+      color: #fff;
+      padding: 0 7px;
+      box-sizing: border-box;
+      background-color: #81B214;
+      border-radius: 10px;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    /* nav */
+    .nav {
+      width: 100%;
+      height: 56px;
+      bottom: 0;
+      position: fixed;
+      padding: 10px;
+      box-sizing: border-box;
+      background-color: #EDF1D6;
+    }
+
+    .nav ul {
+      overflow: hidden;
+    }
+
+    .nav li {
+      width: 25%;
+      float: left;
+      text-align: center;
+    }
+
+    .nav li p {
+      font-size: 11px;
+    }
+
+    .nav li i {
+      font-size: 20px;
+    }
+
+
+    @media screen and (orientation:landscape) {
+
+      .list_info div:first-child,
+      .list_info div:last-child {
+        width: 65px;
+        height: 55px;
+      }
+
+      .list_info div:nth-child(2) {
+        width: calc(100% - 110px);
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="status_bar">
+    <ul class="bar_left bar">
+      <li>
+        <i class="fas fa-circle"></i>
+        <i class="fas fa-circle"></i>
+        <i class="fas fa-circle"></i>
+        <i class="fas fa-circle"></i>
+        <i class="far fa-circle"></i>
+      </li>
+      <li>EI</li>
+      <li><i class="fas fa-wifi"></i></li>
+    </ul>
+    <div class="time">
+      <p>15:26</p>
+    </div>
+    <ul class="bar_right bar">
+      <li><i class="fas fa-moon"></i></li>
+      <li><i class="fab fa-bluetooth-b"></i></li>
+      <li>50%</li>
+      <li><i class="fas fa-battery-half"></i></li>
+    </ul>
+  </div> <!-- //status_bar -->
+  <header class="header">
+    <div>
+      <h3><i class="fas fa-chevron-left"></i> Back</h3>
+    </div>
+    <div>
+      <h3><strong>Friend</strong></h3>
+    </div>
+  </header> <!-- //header -->
+
+  <div class="search">
+    <div class="search_bar">
+      <i class="fas fa-search"></i>
+      <p>Search</p>
+      <i class="fas fa-microphone mic"></i>
+    </div>
+  </div><!-- //search -->
+
+  <div class="chat_list">
+    <div class="list01 list">
+      <div class="list_img">
+        <img src="./images/avatar1.png" alt="avatar1">
+      </div>
+      <div class="list_txt">
+        <span>Elis Nomard</span>
+        <p>Hi! there~~</p>
+      </div>
+      <div class="list_time">
+        <p>17:45</p>
+        <span class="alarm">12</span>
+      </div>
+    </div><!-- list01 -->
+    <div class="list02 list">
+      <div class="list_img">
+        <img src="./images/avatar2.png" alt="avatar2">
+      </div>
+      <div class="list_txt">
+        <span>Dr.Karl</span>
+        <p>Was it fun in England?</p>
+      </div>
+      <div class="list_time">
+        <p>14:20</p>
+      </div>
+    </div><!-- list02 -->
+    <div class="list03 list">
+      <div class="list_img">
+        <img src="./images/avatar3.png" alt="avatar3">
+      </div>
+      <div class="list_txt">
+        <span>Jay</span>
+        <p>Mom..I love you so much</p>
+      </div>
+      <div class="list_time">
+        <p>08:30</p>
+      </div>
+    </div><!-- list03 -->
+    <div class="list04 list">
+      <div class="list_img">
+        <img src="./images/avatar12.png" alt="avatar4-0">
+      </div>
+      <div class="list_txt">
+        <span>Andrew</span>
+        <p>Enjoy It!</p>
+      </div>
+      <div class="list_time">
+        <p>04/10/17</p>
+      </div>
+    </div><!-- list04 -->
+    <div class="list05 list">
+      <div class="list_img">
+        <img src="./images/avatar4.png" alt="avatar4">
+      </div>
+      <div class="list_txt">
+        <span>Kevin</span>
+        <p>OK.</p>
+      </div>
+      <div class="list_time">
+        <p>04/10/17</p>
+      </div>
+    </div><!-- list05 -->
+    <div class="list06 list">
+      <div class="list_img">
+        <img src="./images/avatar5.png" alt="avatar5">
+      </div>
+      <div class="list_txt">
+        <span>Cristina Love</span>
+        <p>Have fun</p>
+      </div>
+      <div class="list_time">
+        <p>04/10/17</p>
+      </div>
+    </div><!-- list06 -->
+    <div class="list07 list">
+      <div class="list_img">
+        <img src="./images/avatar6.png" alt="avatar6">
+      </div>
+      <div class="list_txt">
+        <span>Lauel.K</span>
+        <p>It was so cold and sweet</p>
+      </div>
+      <div class="list_time">
+        <p>04/10/17</p>
+      </div>
+    </div><!-- list07 -->
+    <div class="list08 list">
+      <div class="list_img">
+        <img src="./images/avatar7.png" alt="avatar7">
+      </div>
+      <div class="list_txt">
+        <span>Ryan young</span>
+        <p>See you tomorrow</p>
+      </div>
+      <div class="list_time">
+        <p>04/10/17</p>
+      </div>
+    </div><!-- list08 -->
+    <div class="list09 list">
+      <div class="list_img">
+        <img src="./images/avatar8.png" alt="avatar8">
+      </div>
+      <div class="list_txt">
+        <span>yuri</span>
+        <p>I love you so much</p>
+      </div>
+      <div class="list_time">
+        <p>04/10/17</p>
+      </div>
+    </div><!-- list09 -->
+    <div class="list10 list">
+      <div class="list_img">
+        <img src="./images/avatar9.png" alt="avatar9">
+      </div>
+      <div class="list_txt">
+        <span>Saeri</span>
+        <p>I love you so much</p>
+      </div>
+      <div class="list_time">
+        <p>04/10/17</p>
+      </div>
+    </div><!-- list10 -->
+    <div class="list11 list">
+      <div class="list_img">
+        <img src="./images/avatar10.png" alt="avatar10">
+      </div>
+      <div class="list_txt">
+        <span>Minsu</span>
+        <p>Cheer up!</p>
+      </div>
+      <div class="list_time">
+        <p>04/10/17</p>
+      </div>
+    </div><!-- list11 -->
+    <div class="list12 list">
+      <div class="list_img">
+        <img src="./images/avatar11.png" alt="avatar11">
+      </div>
+      <div class="list_txt">
+        <span>Chris</span>
+        <p>thank u</p>
+      </div>
+      <div class="list_time">
+        <p>04/10/17</p>
+      </div>
+    </div><!-- list12 -->
+    <div class="list13 list">
+      <div class="list_img">
+        <img src="./images/avatar13.png" alt="avatar13">
+      </div>
+      <div class="list_txt">
+        <span>Jaenie</span>
+        <p>Sorry</p>
+      </div>
+      <div class="list_time">
+        <p>04/10/17</p>
+      </div>
+    </div><!-- list13 -->
+    <div class="list14 list">
+      <div class="list_img">
+        <img src="./images/avatar14.png" alt="avatar14">
+      </div>
+      <div class="list_txt">
+        <span>Lee</span>
+        <p>OK</p>
+      </div>
+      <div class="list_time">
+        <p>04/10/17</p>
+      </div>
+    </div><!-- list14 -->
+    <div class="list15 list">
+      <div class="list_img">
+        <img src="./images/avatar15.png" alt="avatar15">
+      </div>
+      <div class="list_txt">
+        <span>Keem</span>
+        <p>my puppy</p>
+      </div>
+      <div class="list_time">
+        <p>04/10/17</p>
+      </div>
+    </div><!-- list15 -->
+
+  </div>
+
+  <section class="nav">
+    <ul>
+      <li>
+        <i class="fas fa-user"></i>
+        <p>Friends</p>
+      </li>
+      <li>
+        <i class="far fa-comment"></i>
+        <p>Talk</p>
+      </li>
+      <li>
+        <i class="far fa-star"></i>
+        <p>Favorite</p>
+      </li>
+      <li>
+        <i class="fas fa-ellipsis-h"></i>
+        <p>More</p>
+      </li>
+    </ul>
+  </section>
+
+
+
+
+
+
+
+</body>
+
+
+</html>

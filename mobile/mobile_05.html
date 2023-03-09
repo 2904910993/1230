@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=no">
+  <title>Mobile responsive</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      width: 100%;
+      height: 100px;
+    }
+
+    .box01 {
+      background-color: tomato;
+    }
+
+    .box02 {
+      background-color: teal;
+    }
+
+    /* 미디어 쿼리 미디어 타입(screen, print, all, only) */
+    /* 미디어 쿼리 문법
+    @media only|not 매체유형 and (표현식) { CSS스타일코드; } */
+    @media only screen and (min-width:321px) and (orientation:landscape) {
+      .boxA {
+        overflow: hidden;
+      }
+
+      .boxA .box {
+        width: 50%;
+        float: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="boxA">
+    <div class="box01 box">box01</div>
+    <div class="box02 box">box02</div>
+  </section>
+
+
+</body>
+
+</html>

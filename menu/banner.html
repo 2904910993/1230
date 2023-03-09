@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banner</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+    }
+
+
+    /* header */
+
+    #ham_chk {
+      display: none;
+    }
+
+    #ham_chk:checked~.header_box .header_list {
+      display: block;
+    }
+
+    #ham_chk~.header_box .header_list {
+      display: none;
+    }
+
+    /* #ham_chk:checked~.header_box .header_list {
+      height: 300px;
+    } */
+
+
+    #ham_chk:checked~.header_box .header .header_close {
+      display: block;
+    }
+
+    #ham_chk:checked~.header_box .header .header_open {
+      display: none;
+    }
+
+    #ham_chk~.header_box .header .header_close {
+      display: none;
+    }
+
+    #ham_chk~.header_box .header .header_open {
+      display: block;
+    }
+
+    .header_box {
+      width: 1050px;
+      margin: 0 auto;
+    }
+
+    .header_box .header {
+      width: 1050px;
+      height: 50px;
+    }
+
+    .header_box .header label {
+      display: block;
+      width: 50px;
+      height: 50px;
+      border: 1px solid black;
+      box-sizing: border-box;
+      font-size: 40px;
+      line-height: 50px;
+      text-align: center;
+      cursor: pointer;
+      float: left;
+    }
+
+    .header_box .header ul {
+      width: 1000px;
+      float: left;
+    }
+
+    .header_box .header ul li {
+      width: 200px;
+      height: 50px;
+      background-color: black;
+      color: white;
+      text-align: center;
+      line-height: 50px;
+      float: left;
+    }
+
+    .header_box .header_list {
+      width: 1050px;
+      height: 200px;
+      display: none;
+      /* width: 1050px;
+      height: 0; */
+      /* 높이를 조절하는 방법 */
+      /* overflow: hidden; */
+      /* 잊지말고 작성해야 함 */
+      background-color: #ccc;
+      transition: all 0.2s;
+    }
+
+
+    /* -------- wing_banner -------- */
+    #wing_chk {
+      display: none;
+    }
+
+    #wing_chk:checked~.wing_banner {
+      right: 0;
+    }
+
+    #wing_chk~.wing_banner {
+      right: -300px;
+    }
+
+    #wing_chk:checked~.wing_banner .wing_close {
+      display: block;
+    }
+
+    #wing_chk~.wing_banner .wing_open {
+      display: none;
+    }
+
+    #wing_chk~.wing_banner .wing_close {
+      display: none;
+    }
+
+    #wing_chk~.wing_banner .wing_open {
+      display: block;
+    }
+
+    .wing_banner {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 330px;
+      height: 100vh;
+      /* border: 1px solid black; */
+      transition: all 0.3s;
+    }
+
+    .wing_banner label {
+      display: block;
+      width: 30px;
+      height: 30px;
+      background-color: yellow;
+      float: left;
+      margin-top: 200px;
+    }
+
+    .wing_banner .wing {
+      width: 300px;
+      height: 100%;
+      background-color: #ccc;
+      float: left;
+    }
+
+    /* -------- top_btn -------- */
+    .top_btn {
+      position: fixed;
+      bottom: 100px;
+      right: 100px;
+      display: block;
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      line-height: 50px;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <header>
+    <input type="checkbox" id="ham_chk">
+    <div class="header_box">
+      <nav class="header">
+        <label for="ham_chk" class="header_open">+</label>
+        <label for="ham_chk" class="header_close">-</label>
+        <ul>
+          <li>menu01</li>
+          <li>menu02</li>
+          <li>menu03</li>
+          <li>menu04</li>
+          <li>menu05</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <aside class="wing_box">
+    <input type="checkbox" id="wing_chk">
+    <div class="wing_banner">
+      <label for="wing_chk" class="wing_open">
+        <</label> <label for="wing_chk" class="wing_close">X
+      </label>
+      <div class="wing">
+        wing_banner
+      </div> <!-- 실제적으로 움직이는 부분 -->
+    </div>
+  </aside>
+
+  <a href="#header" class="top_btn">TOP</a>
+
+
+
+
+</body>
+
+</html>
